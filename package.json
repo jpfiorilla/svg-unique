@@ -12,7 +12,7 @@
     "uuid": "^3.2.1"
   },
   "bin": {
-    "svgunique": "index.js"
+    "svg-unique": "index.js"
   },
   "devDependencies": {},
   "scripts": {

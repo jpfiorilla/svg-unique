@@ -4,9 +4,9 @@ const mkdirp = require('mkdirp');
 const commandLineArgs = require('command-line-args');
 const fs = require('fs');
 
-const readFile = fileName => {
-  if (!fileName) return;
-  const path = `./input/${fileName}${fileName.includes('.') ? '' : '.svg'}`;
+const readFile = (fileName, inputPath) => {
+  if (!fileName || !inputPath) return;
+  const path = `${inputPath}/${fileName}`;
   const string = fs.readFileSync(path, 'utf-8');
   return string;
 };
@@ -38,14 +38,17 @@ String.prototype.replaceAll = function(search, replacement) {
 const replaceIds = (file, idMap) => {
   let newFile = file;
   Object.keys(idMap).forEach(
-    id => (newFile = newFile.replaceAll(id, idMap[id]))
+    id =>
+      (newFile = newFile
+        .replaceAll(`id="${id}"`, `id="${idMap[id]}"`)
+        .replaceAll(`#${id}`, `#${idMap[id]}`))
   );
   return newFile;
 };
 
 const saveFile = (fileName, inputPath, outputPath) => {
   if (!fileName) return;
-  const file = readFile(fileName);
+  const file = readFile(fileName, inputPath);
   return svgson(file, {}, result => {
     const { name, attrs, childs } = result;
     const ids = collectIds(childs);
@@ -67,8 +70,16 @@ const isSvg = fileName =>
 
 const saveFolder = (inputPath, outputPath) =>
   fs.readdir(inputPath, (err, files) => {
-    if (!files || files.length === 0) {
-      console.log(`${inputPath} is empty.`);
+    if (
+      !files ||
+      files.length === 0 ||
+      files.filter(file => isSvg(file)).length === 0
+    ) {
+      console.log(
+        `${
+          inputPath === '.' ? 'This folder' : inputPath
+        } contains no .svg files.`
+      );
       return;
     }
     return files.forEach(file => {
@@ -87,4 +98,4 @@ const options = commandLineArgs([
   }
 ]);
 
-saveFolder(options.input || './input', options.output || './output');
+saveFolder(options.input || '.', options.output || '.');

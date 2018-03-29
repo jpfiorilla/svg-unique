@@ -4,10 +4,11 @@ Programs like Sketch output their .svg files with the same ids as each other by 
 
 This script solves this issue by renaming the id and class attributes of all SVG elements to be unique.
 
-Install:
+# Install:
+
 `$ npm i -g svg-unique`
 
-Use:
+# Use:
 
 `$ svg-unique`
 

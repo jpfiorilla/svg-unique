@@ -98,4 +98,4 @@ const options = commandLineArgs([
   }
 ]);
 
-saveFolder(options.input || '.', options.output || '.');
+saveFolder(options.input || '.', options.output || options.input || '.');

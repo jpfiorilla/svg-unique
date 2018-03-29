@@ -5,22 +5,10 @@ require.extensions['.txt'] = function(module, filename) {
   module.exports = fs.readFileSync(filename, 'utf8');
 };
 
-const readFile = (fileName = 'add') => {
+const readFile = fileName => {
+  if (!fileName) return;
   const path = `./input/${fileName}${fileName.includes('.') ? '' : '.svg'}`;
-  const string = fs.readFileSync(path, 'utf-8', (err, data) => {
-    return svgson(
-      data,
-      {
-        svgo: true,
-        title: 'myFile',
-        pathsKey: 'myPaths',
-        customAttrs: {
-          foo: true
-        }
-      }
-      //   res => console.log(res)
-    );
-  });
+  const string = fs.readFileSync(path, 'utf-8');
   return string;
 };
 
@@ -59,7 +47,6 @@ const replaceIds = (file, idMap) => {
 const saveFile = fileName => {
   if (!fileName) return;
   const file = readFile(fileName);
-  console.log(file);
   return svgson(file, {}, result => {
     const { name, attrs, childs } = result;
     const ids = collectIds(childs);
@@ -75,4 +62,20 @@ const saveFile = fileName => {
   });
 };
 
-saveFile('add');
+// saveFile('add');
+
+const isSvg = fileName =>
+  fileName.substring(fileName.lastIndexOf('.')) === '.svg';
+
+const saveFolder = (path = '.') => {
+  fs.readdir(path, (err, files) => {
+    files.forEach(file => {
+      console.log(isSvg(file));
+      if (isSvg(file)) {
+        saveFile(file);
+      }
+    });
+  });
+};
+
+saveFolder('./input');

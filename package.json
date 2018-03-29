@@ -1,8 +1,7 @@
 {
   "name": "svg-unique",
-  "version": "0.0.1",
-  "description":
-    "Rewrite a set of svg files with unique ids so they don't override each other on webpages.",
+  "version": "0.0.2",
+  "description": "Rewrite a set of svg files with unique ids so they don't override each other on webpages.",
   "main": "index.js",
   "dependencies": {
     "command-line-args": "^5.0.2",
@@ -22,7 +21,10 @@
     "type": "git",
     "url": "git+https://github.com/jpfiorilla/svg-unique-ids.git"
   },
-  "keywords": ["svg", "unique"],
+  "keywords": [
+    "svg",
+    "unique"
+  ],
   "author": "john fiorilla",
   "license": "ISC",
   "bugs": {

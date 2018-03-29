@@ -1,6 +1,5 @@
 const uuid = require('uuid/v4');
 const svgson = require('svgson');
-const _ = require('lodash');
 const fs = require('fs');
 require.extensions['.txt'] = function(module, filename) {
   module.exports = fs.readFileSync(filename, 'utf8');
@@ -9,7 +8,6 @@ require.extensions['.txt'] = function(module, filename) {
 const readFile = (fileName = 'add') => {
   const path = `./input/${fileName}${fileName.includes('.') ? '' : '.svg'}`;
   const string = fs.readFileSync(path, 'utf-8', (err, data) => {
-    // console.log(err, data);
     return svgson(
       data,
       {
@@ -19,19 +17,12 @@ const readFile = (fileName = 'add') => {
         customAttrs: {
           foo: true
         }
-      },
-      function(result) {
-        // console.log(result);
       }
+      //   res => console.log(res)
     );
   });
-  //   console.log(string);
   return string;
 };
-
-// readFile();
-// console.log(readFile());
-// svgson(readFile(), {}, result => console.log(result));
 
 const collectIds = childs => {
   let ids = [];
@@ -39,7 +30,6 @@ const collectIds = childs => {
     if (child.attrs.id && !ids.includes(child.attrs.id))
       ids.push(child.attrs.id);
     if (child.childs) {
-      console.log(child);
       ids = [...ids, ...collectIds(child.childs)];
     }
   });
@@ -54,36 +44,35 @@ const generateIdMap = ids => {
   return idMap;
 };
 
-const replaceIds = (parent, idMap) => {
-  parent.childs.forEach((child, i) => {
-    const { attrs, childs } = child;
-    if (attrs) {
-      Object.keys(attrs).forEach(key => {
-        Object.keys(idMap).forEach(id => {
-          if (attrs[key].includes(id)) {
-            attrs[key] = attrs[key].replace(id, idMap[id]);
-          }
-        });
-      });
-    }
-    if (childs) parent.childs[i] = replaceIds(child, idMap);
-  });
-  return parent;
+String.prototype.replaceAll = function(search, replacement) {
+  return this.replace(new RegExp(search, 'g'), replacement);
 };
 
-const editFile = (file = readFile()) => {
+const replaceIds = (file, idMap) => {
+  let newFile = file;
+  Object.keys(idMap).forEach(
+    id => (newFile = newFile.replaceAll(id, idMap[id]))
+  );
+  return newFile;
+};
+
+const saveFile = fileName => {
+  if (!fileName) return;
+  const file = readFile(fileName);
   console.log(file);
-  svgson(file, {}, result => {
+  return svgson(file, {}, result => {
     const { name, attrs, childs } = result;
-    console.log(childs);
-    console.log('\n');
-    console.log(childs[0].childs[0]);
     const ids = collectIds(childs);
+    if (ids.length === 0) return;
     const idMap = generateIdMap(ids);
-    const newJson = replaceIds(result, idMap);
-    console.log('\n');
-    console.log(newJson, newJson.childs[0].childs[0]);
+    const newFile = replaceIds(file, idMap);
+    console.log(newFile);
+    // return newFile;
+    return fs.writeFile(`./output/${fileName}.svg`, newFile, err => {
+      if (err) return console.log(err);
+      console.log('The file was saved!');
+    });
   });
 };
 
-editFile();
+saveFile('add');

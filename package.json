@@ -1,6 +1,6 @@
 {
   "name": "svg-unique",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Rewrite a set of svg files with unique ids so they don't override each other on webpages.",
   "main": "index.js",
   "dependencies": {

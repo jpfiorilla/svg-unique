@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <path id="dealhomea" d="M18 4h-4V2c0-1.11-.89-2-2-2H8C6.89 0 6 .89 6 2v2H2C.89 4 .01 4.89.01 6L0 17c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm-6 0H8V2h4v2z"/>
+        <path id="dealhomec" d="M3 7.467V5.33l2 .003v2.134h2v-3.2h1L4 0 0 4.267h1v3.2z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path d="M0 0h24v24H0z"/>
+        <g transform="translate(2 2)">
+            <mask id="dealhomeb" fill="#fff">
+                <use xlink:href="#dealhomea"/>
+            </mask>
+            <use fill="#000" fill-rule="nonzero" xlink:href="#dealhomea"/>
+            <g fill="#FFF" class="fill" mask="url(#dealhomeb)">
+                <path d="M-3-3h26v26H-3z"/>
+            </g>
+        </g>
+        <g transform="translate(8 10.267)">
+            <mask id="dealhomed" fill="#fff">
+                <use xlink:href="#dealhomec"/>
+            </mask>
+            <use fill="#000" fill-rule="nonzero" xlink:href="#dealhomec"/>
+            <g fill="#555" mask="url(#dealhomed)">
+                <path d="M-4-4.267h16v16H-4z"/>
+            </g>
+        </g>
+    </g>
+</svg>

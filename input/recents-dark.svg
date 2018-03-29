@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20">
+  <defs>
+    <path id="recents-dark-a" d="M11,11 L11,6 L13,6 L13,11.5 L13,13 L6,13 L6,11 L11,11 Z M12,2 C17.52,2 22,6.48 22,12 C22,17.52 17.52,22 12,22 C6.48,22 2,17.52 2,12 L4,12 C4,16.41 7.59,20 12,20 C16.41,20 20,16.41 20,12 C20,7.59 16.41,4 12,4 L12,2 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd" transform="translate(-2 -2)">
+    <polygon points="0 0 24 0 24 24 0 24"/>
+    <mask id="recents-dark-b" fill="#fff">
+      <use xlink:href="#recents-dark-a"/>
+    </mask>
+    <use fill="#000" xlink:href="#recents-dark-a"/>
+    <g fill="#DBB77D" mask="url(#recents-dark-b)">
+      <rect width="24" height="24"/>
+    </g>
+  </g>
+</svg>

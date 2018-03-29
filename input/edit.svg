@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 14 14">
   <defs>
-    <path id="edit-ls-green-a" d="M2.25,12.939375 L2.25,15.751875 L5.0625,15.751875 L13.3575,7.456875 L10.545,4.644375 L2.25,12.939375 Z M15.5325,5.281875 C15.825,4.989375 15.825,4.516875 15.5325,4.224375 L13.7775,2.469375 C13.485,2.176875 13.0125,2.176875 12.72,2.469375 L11.3475,3.841875 L14.16,6.654375 L15.5325,5.281875 Z"/>
+    <path id="e2a0a0b3-5406-46cc-84c0-4b3ff84328a8" d="M2.25,12.939375 L2.25,15.751875 L5.0625,15.751875 L13.3575,7.456875 L10.545,4.644375 L2.25,12.939375 Z M15.5325,5.281875 C15.825,4.989375 15.825,4.516875 15.5325,4.224375 L13.7775,2.469375 C13.485,2.176875 13.0125,2.176875 12.72,2.469375 L11.3475,3.841875 L14.16,6.654375 L15.5325,5.281875 Z"/>
   </defs>
   <g fill="none" fill-rule="evenodd" transform="translate(-2 -2)">
     <polygon points="0 0 18 0 18 18 0 18"/>
-    <mask id="edit-ls-green-b" fill="#fff">
-      <use xlink:href="#edit-ls-green-a"/>
+    <mask id="093ed28c-59af-4ebb-8377-0703bed4c146" fill="#fff">
+      <use xlink:href="#e2a0a0b3-5406-46cc-84c0-4b3ff84328a8"/>
     </mask>
-    <use fill="#000" fill-rule="nonzero" xlink:href="#edit-ls-green-a"/>
-    <g fill="#137B3E" mask="url(#edit-ls-green-b)">
+    <use fill="#000" fill-rule="nonzero" xlink:href="#e2a0a0b3-5406-46cc-84c0-4b3ff84328a8"/>
+    <g fill="#137B3E" mask="url(#093ed28c-59af-4ebb-8377-0703bed4c146)">
       <rect width="20" height="20" transform="translate(-.75 -.75)"/>
     </g>
   </g>

@@ -1,9 +1,8 @@
 const uuid = require('uuid/v4');
 const svgson = require('svgson');
+const mkdirp = require('mkdirp');
+const commandLineArgs = require('command-line-args');
 const fs = require('fs');
-require.extensions['.txt'] = function(module, filename) {
-  module.exports = fs.readFileSync(filename, 'utf8');
-};
 
 const readFile = fileName => {
   if (!fileName) return;
@@ -44,7 +43,7 @@ const replaceIds = (file, idMap) => {
   return newFile;
 };
 
-const saveFile = fileName => {
+const saveFile = (fileName, inputPath, outputPath) => {
   if (!fileName) return;
   const file = readFile(fileName);
   return svgson(file, {}, result => {
@@ -53,29 +52,39 @@ const saveFile = fileName => {
     if (ids.length === 0) return;
     const idMap = generateIdMap(ids);
     const newFile = replaceIds(file, idMap);
-    console.log(newFile);
-    // return newFile;
-    return fs.writeFile(`./output/${fileName}.svg`, newFile, err => {
-      if (err) return console.log(err);
-      console.log('The file was saved!');
+    return mkdirp(outputPath, err => {
+      if (err) console.log(err);
+      return fs.writeFile(`${outputPath}/${fileName}`, newFile, err => {
+        if (err) return console.log(err);
+        console.log(`${outputPath}/${fileName} was saved!`);
+      });
     });
   });
 };
-
-// saveFile('add');
 
 const isSvg = fileName =>
   fileName.substring(fileName.lastIndexOf('.')) === '.svg';
 
-const saveFolder = (path = '.') => {
-  fs.readdir(path, (err, files) => {
-    files.forEach(file => {
-      console.log(isSvg(file));
-      if (isSvg(file)) {
-        saveFile(file);
-      }
+const saveFolder = (inputPath, outputPath) =>
+  fs.readdir(inputPath, (err, files) => {
+    if (!files || files.length === 0) {
+      console.log(`${inputPath} is empty.`);
+      return;
+    }
+    return files.forEach(file => {
+      if (isSvg(file)) saveFile(file, inputPath, outputPath);
     });
   });
-};
 
-saveFolder('./input');
+const options = commandLineArgs([
+  {
+    name: 'input',
+    type: String
+  },
+  {
+    name: 'output',
+    type: String
+  }
+]);
+
+saveFolder(options.input || './input', options.output || './output');

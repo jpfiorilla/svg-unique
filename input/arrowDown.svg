@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="10" height="10" viewBox="0 0 10 10">
   <defs>
-    <polygon id="arrow-d-a" points="5.833 5 5.833 15 14.167 10"/>
+    <polygon id="474c4d40-a00d-4bcb-ae1a-4b21f38e8595" points="5.833 5 5.833 15 14.167 10"/>
   </defs>
   <g fill="none" fill-rule="evenodd" transform="translate(-5 -5)">
     <polygon points="0 0 20 0 20 20 0 20"/>
-    <mask id="arrow-d-b" fill="#fff">
-      <use xlink:href="#arrow-d-a"/>
+    <mask id="b4d6f1d4-c1f0-49a5-b36b-ed2cf49e6bf4" fill="#fff">
+      <use xlink:href="#474c4d40-a00d-4bcb-ae1a-4b21f38e8595"/>
     </mask>
-    <use fill="#000" transform="rotate(90 10 10)" xlink:href="#arrow-d-a"/>
+    <use fill="#000" transform="rotate(90 10 10)" xlink:href="#474c4d40-a00d-4bcb-ae1a-4b21f38e8595"/>
   </g>
 </svg>

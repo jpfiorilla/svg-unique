@@ -2,7 +2,7 @@
 
 Programs like Sketch output their .svg files with the same ids as each other by default, which causes the svgs to override each other's markup when multiple are displayed on a webpage.
 
-This script solves this issue by renaming the id and class attributes of all SVG elements to be unique.
+This script solves this issue by renaming the `id` and `class` attributes of all SVG elements to be unique.
 
 ### Install:
 

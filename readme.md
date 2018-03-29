@@ -1,21 +1,21 @@
 ## Edit your SVGs to have unique markup
 
-Programs like Sketch output their .svg files with the same ids as each other by default, which causes them to override each other when multiple svgs are displayed on a webpage.
+Programs like Sketch output their .svg files with the same ids as each other by default, which causes the svgs to override each other's markup when multiple are displayed on a webpage.
 
-This repo solves this issue by renaming the attributes of all SVG elements to be unique.
+This script solves this issue by renaming the id and class attributes of all SVG elements to be unique.
 
 Install:
-`$ npm i --save svg-unique`
+`$ npm i -g svg-unique`
 
 Use:
 
-`$ node svg-unique`
+`$ svg-unique`
 
 or
 
-`$ node svg-unique --input=customInputFolder --output=customOutputFolder`
+`$ svg-unique --input=./customInputDir --output=./customOutputDir`
 
 | Argument | Use                     | Default value |
 | -------- | ----------------------- | ------------- |
 | --input  | Custom input directory  | .             |
-| --output | Custom output directory | .             |
+| --output | Custom output directory | --input       |

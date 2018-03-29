@@ -23,12 +23,32 @@ const collectIds = childs => {
   return ids;
 };
 
+const collectClasses = childs => {
+  let classes = [];
+  childs.forEach(child => {
+    if (child.attrs.class && !classes.includes(child.attrs.class))
+      classes.push(child.attrs.class);
+    if (child.childs) {
+      classes = [...classes, ...collectClasses(child.childs)];
+    }
+  });
+  return classes;
+};
+
 const generateIdMap = ids => {
   const idMap = {};
   ids.forEach(id => {
     idMap[id] = uuid();
   });
   return idMap;
+};
+
+const generateClassMap = classes => {
+  const classMap = {};
+  classes.forEach(className => {
+    classMap[className] = uuid();
+  });
+  return classMap;
 };
 
 String.prototype.replaceAll = function(search, replacement) {
@@ -46,15 +66,32 @@ const replaceIds = (file, idMap) => {
   return newFile;
 };
 
+const replaceClasses = (file, classMap) => {
+  let newFile = file;
+  Object.keys(classMap).forEach(
+    className =>
+      (newFile = newFile
+        .replaceAll(`class="${className}"`, `class="${classMap[className]}"`)
+        .replaceAll(`#${className}`, `#${classMap[className]}`))
+  );
+  return newFile;
+};
+
 const saveFile = (fileName, inputPath, outputPath) => {
   if (!fileName) return;
   const file = readFile(fileName, inputPath);
   return svgson(file, {}, result => {
-    const { name, attrs, childs } = result;
-    const ids = collectIds(childs);
-    if (ids.length === 0) return;
+    const ids = collectIds(result.childs);
+    const classes = collectClasses(result.childs);
+    if (ids.length === 0 && classes.length === 0) {
+      console.log(
+        `${outputPath}/${fileName} was not rewritten as it contains no id or class attributes.`
+      );
+      return;
+    }
     const idMap = generateIdMap(ids);
-    const newFile = replaceIds(file, idMap);
+    const classMap = generateClassMap(classes);
+    const newFile = replaceClasses(replaceIds(file, idMap), classMap);
     return mkdirp(outputPath, err => {
       if (err) console.log(err);
       return fs.writeFile(`${outputPath}/${fileName}`, newFile, err => {

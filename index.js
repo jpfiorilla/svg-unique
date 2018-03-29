@@ -72,7 +72,7 @@ const replaceClasses = (file, classMap) => {
     className =>
       (newFile = newFile
         .replaceAll(`class="${className}"`, `class="${classMap[className]}"`)
-        .replaceAll(`#${className}`, `#${classMap[className]}`))
+        .replaceAll(`.${className}`, `.${classMap[className]}`))
   );
   return newFile;
 };

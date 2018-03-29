@@ -54,12 +54,22 @@ const generateIdMap = ids => {
   return idMap;
 };
 
-// const replaceIds = (childs, uniqueIds) => {
-//   childs.forEach(child => {
-//       if (child.mask.includes('#')) child.mask = `url#()`
-//   })
-//   return childs;
-// };
+const replaceIds = (parent, idMap) => {
+  parent.childs.forEach((child, i) => {
+    const { attrs, childs } = child;
+    if (attrs) {
+      Object.keys(attrs).forEach(key => {
+        Object.keys(idMap).forEach(id => {
+          if (attrs[key].includes(id)) {
+            attrs[key] = attrs[key].replace(id, idMap[id]);
+          }
+        });
+      });
+    }
+    if (childs) parent.childs[i] = replaceIds(child, idMap);
+  });
+  return parent;
+};
 
 const editFile = (file = readFile()) => {
   console.log(file);
@@ -70,13 +80,9 @@ const editFile = (file = readFile()) => {
     console.log(childs[0].childs[0]);
     const ids = collectIds(childs);
     const idMap = generateIdMap(ids);
+    const newJson = replaceIds(result, idMap);
     console.log('\n');
-    console.log(idMap);
-    // const uniqueIds = ids.map(id => ({ id, uniqueId: uuid() }));
-    // console.log(uniqueIds);
-    // const newJson = replaceIds(childs, uniqueIds);
-    // console.log('\n');
-    // console.log(newJson);
+    console.log(newJson, newJson.childs[0].childs[0]);
   });
 };
 

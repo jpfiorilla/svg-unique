@@ -8,8 +8,11 @@ Install:
 `$ npm i --save svg-unique`
 
 Use:
+
 `$ node svg-unique`
+
 or
+
 `$ node svg-unique --input=customInputFolder --output=customOutputFolder`
 
 | Argument | Use                     | Default value |

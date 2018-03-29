@@ -14,5 +14,5 @@ or
 
 | Argument | Use                     | Default value |
 | -------- | ----------------------- | ------------- |
-| --input  | Custom input directory  | '.'           |
-| --output | Custom output directory | '.'           |
+| --input  | Custom input directory  | .             |
+| --output | Custom output directory | .             |

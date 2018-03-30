@@ -10,11 +10,11 @@ This script solves this issue by renaming the `id` and `class` attributes of all
 
 ### Use:
 
-`$ svg-unique`
+`$ svgu`
 
 or
 
-`$ svg-unique --input=./customInputDir --output=./customOutputDir`
+`$ svgu --input=./customInputDir --output=./customOutputDir`
 
 | Argument | Use                     | Default value |
 | -------- | ----------------------- | ------------- |
